@@ -2,7 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const app = express();
-const port = 3000;
+const port = 3001;
 
 // Kết nối tới cơ sở dữ liệu MySQL
 const connection = mysql.createConnection({

@@ -20,6 +20,8 @@ function MyDrawer() {
 
 export default function DrawerHome() {
   return (
-    <MyDrawer />
+    <NavigationContainer>
+      <MyDrawer />
+    </NavigationContainer>
   );
 }

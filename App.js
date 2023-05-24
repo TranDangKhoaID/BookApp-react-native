@@ -7,5 +7,5 @@ import RegisterScreen from './screens/Register';
 import StackNavi from './screens/StackLogin';
 
 export default function App(){
-  return <StackNavi />
+  return <DrawerHome />
 }
