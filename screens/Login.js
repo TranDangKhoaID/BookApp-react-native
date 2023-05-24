@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, stylessocialButton, View, Text, TextInput, TouchableOpacity, Image, SafeAreaView } from 'react-native';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import * as SecureStore from 'expo-secure-store';
 
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -21,19 +22,27 @@ const LoginScreen = ({ navigation }) => {
             },
             body: JSON.stringify(user),
         })
-        .then(response => response.json())
-        .then(data => {
-            // Kiểm tra kết quả đăng nhập từ API
-            if (data.success) {
-                // Đăng nhập thành công, điều hướng đến màn hình chính
-                navigation.navigate('DraHome');
-            } else {
-                // Đăng nhập không thành công, xử lý thông báo lỗi hoặc các hành động khác
-                alert('Đăng nhập thất bại: ' + data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
+            .then(response => response.json())
+            .then(data => {
+                // Kiểm tra kết quả đăng nhập từ API
+                if (data.success) {
+                    // Lưu thông tin người dùng
+                    SecureStore.setItemAsync('userData', JSON.stringify(data.user)) // Store user data securely
+                    .then(() => {
+                        navigation.navigate('DraHome'); // Navigate to the main screen
+                    })
+                    .catch(error => {
+                        console.error('Error storing data:', error);
+                    });
+                    // Điều hướng đến màn hình chính
+                    navigation.navigate('DraHome');
+                } else {
+                    // Đăng nhập không thành công, xử lý thông báo lỗi hoặc các hành động khác
+                    alert('Đăng nhập thất bại: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
         });
     };
     return (
@@ -47,9 +56,9 @@ const LoginScreen = ({ navigation }) => {
                     <TextInput
                         placeholder="Email ID"
                         style={styles.input}
-                        keyboardType="email-address"  
+                        keyboardType="email-address"
                         value={email}
-                        onChangeText={text => setEmail(text)}                   
+                        onChangeText={text => setEmail(text)}
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -57,9 +66,9 @@ const LoginScreen = ({ navigation }) => {
                     <TextInput
                         placeholder="Password"
                         style={styles.input}
-                        secureTextEntry={true}  
+                        secureTextEntry={true}
                         value={password}
-                        onChangeText={text => setPassword(text)}                     
+                        onChangeText={text => setPassword(text)}
                     />
                     <TouchableOpacity onPress={() => { }}>
                         <Text style={styles.loginText}>Forgot</Text>

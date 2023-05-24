@@ -45,7 +45,6 @@ app.get('/api/users', (req, res) => {
 // API endpoint để đăng nhập
 app.post('/api/users/login', (req, res) => {
     const { email, password } = req.body;
-
     // Kiểm tra người dùng trong cơ sở dữ liệu
     const query = 'SELECT * FROM users WHERE email = ? AND password = ?';
     connection.query(query, [email, password], (err, results) => {
@@ -55,14 +54,47 @@ app.post('/api/users/login', (req, res) => {
         } else {
             if (results.length > 0) {
                 // Đăng nhập thành công
-                res.json({ success: true, message: 'Login successful' });
+                // Đăng nhập thành công
+                const user = results[0];
+                res.json({ success: true, message: 'Login successful', user:user });
             } else {
                 // Sai email hoặc mật khẩu
-                res.json({ success: false, message: 'Invalid email or password' });
+                res.json({ success: false, message: 'Invalid email or password'});
             }
         }
     });
 });
+//Đăng kí
+app.post('/api/users/register', (req, res) => {
+    const { name, email, password, phone } = req.body;
+
+    // Kiểm tra xem người dùng có tồn tại trong cơ sở dữ liệu không
+    const checkQuery = 'SELECT * FROM users WHERE email = ?';
+    connection.query(checkQuery, [email], (err, results) => {
+        if (err) {
+            console.error('Error executing database query:', err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        } else {
+            if (results.length > 0) {
+                // Email đã tồn tại trong cơ sở dữ liệu
+                res.json({ success: false, message: 'Email already exists' });
+            } else {
+                // Thêm người dùng vào cơ sở dữ liệu
+                const insertQuery = 'INSERT INTO users (name, email, password, phone) VALUES (?, ?, ?, ?)';
+                connection.query(insertQuery, [name, email, password, phone], (err, results) => {
+                    if (err) {
+                        console.error('Error executing database query:', err);
+                        res.status(500).json({ error: 'Internal Server Error' });
+                    } else {
+                        // Đăng kí thành công
+                        res.json({ success: true, message: 'Registration successful' });
+                    }
+                });
+            }
+        }
+    });
+});
+
 
 
 // Khởi động server
