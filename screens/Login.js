@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.contentContainer}>
@@ -49,7 +49,7 @@ const LoginScreen = () => {
                 </View>
                 <View style={styles.registerContainer}>
                     <Text>New to the app?</Text>
-                    <TouchableOpacity onPress={() => { }}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Register')}>
                         <Text style={styles.registerText}> Register</Text>
                     </TouchableOpacity>
                 </View>

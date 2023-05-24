@@ -5,7 +5,8 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from '@expo/vector-icons';
 
 
-const RegisterScreen = () => {
+
+const RegisterScreen = ({navigation}) => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.contentContainer}>
@@ -15,6 +16,10 @@ const RegisterScreen = () => {
                 <View style={styles.inputContainer}>
                     <MaterialIcons name="person" size={30} color="#666" style={styles.icon} />
                     <TextInput placeholder="Full Name" style={styles.input} />
+                </View>
+                <View style={styles.inputContainer}>
+                    <MaterialIcons name="phone" size={30} color="#666" style={styles.icon} />
+                    <TextInput placeholder="Phone" style={styles.input} keyboardType="numeric" />
                 </View>
                 <View style={styles.inputContainer}>
                     <MaterialIcons name="email" size={30} color="#666" style={styles.icon} />
@@ -31,18 +36,21 @@ const RegisterScreen = () => {
                         style={styles.input}
                         secureTextEntry={true}
                     />
-                    <TouchableOpacity onPress={() => { }} />
                 </View>
                 <View style={styles.inputContainer}>
-                    <MaterialIcons name="phone" size={30} color="#666" style={styles.icon} />
-                    <TextInput placeholder="Phone" style={styles.input} keyboardType="numeric" />
+                    <Ionicons name="ios-lock-closed-outline" size={30} color="#666" style={styles.icon} />
+                    <TextInput
+                        placeholder="Confirm Password"
+                        style={styles.input}
+                        secureTextEntry={true}
+                    />
                 </View>
                 <TouchableOpacity style={styles.buttonContainer} onPress={() => { }}>
                     <Text style={styles.buttonText}>Sign in</Text>
                 </TouchableOpacity>
                 <View style={styles.loginContainer}>
                     <Text>Already registered</Text>
-                    <TouchableOpacity onPress={() => { }}>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
                         <Text style={styles.loginText}> Login</Text>
                     </TouchableOpacity>
                 </View>
