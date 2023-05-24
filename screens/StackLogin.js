@@ -7,6 +7,8 @@ import {
 } from '@react-navigation/stack';
 import LoginScreen from './Login';
 import RegisterScreen from './Register';
+import DrawerHome from './DrawerScreens';
+import HomePage from './HomePage';
 const Stack = createStackNavigator();
 
 function MyStack() {
@@ -19,6 +21,13 @@ function MyStack() {
         options={{
           title: 'Sign in',
           ...TransitionPresets.ModalSlideFromBottomIOS,
+        }}
+      />
+      <Stack.Screen
+        name="DraHome"
+        component={DrawerHome}
+        options={{
+          headerShown: false 
         }}
       />
     </Stack.Navigator>

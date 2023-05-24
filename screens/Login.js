@@ -1,12 +1,41 @@
-import React from "react";
-import { StyleSheet, View, Text, SafeAreaView, TextInput, TouchableOpacity, Image } from 'react-native';
-
-import { MaterialIcons } from "@expo/vector-icons";
-import { Ionicons } from '@expo/vector-icons';
-
-
+import React, { useState } from 'react';
+import { StyleSheet, stylessocialButton, View, Text, TextInput, TouchableOpacity, Image, SafeAreaView } from 'react-native';
+import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 
 const LoginScreen = ({ navigation }) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleLogin = () => {
+        // Tạo một đối tượng chứa thông tin người dùng
+        const user = {
+            email: email,
+            password: password,
+        };
+
+        // Gửi yêu cầu đăng nhập đến API
+        fetch('http://192.168.1.7:3000/api/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user),
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Kiểm tra kết quả đăng nhập từ API
+            if (data.success) {
+                // Đăng nhập thành công, điều hướng đến màn hình chính
+                navigation.navigate('DraHome');
+            } else {
+                // Đăng nhập không thành công, xử lý thông báo lỗi hoặc các hành động khác
+                alert('Đăng nhập thất bại: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    };
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.contentContainer}>
@@ -18,7 +47,9 @@ const LoginScreen = ({ navigation }) => {
                     <TextInput
                         placeholder="Email ID"
                         style={styles.input}
-                        keyboardType="email-address"
+                        keyboardType="email-address"  
+                        value={email}
+                        onChangeText={text => setEmail(text)}                   
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -26,13 +57,15 @@ const LoginScreen = ({ navigation }) => {
                     <TextInput
                         placeholder="Password"
                         style={styles.input}
-                        secureTextEntry={true}
+                        secureTextEntry={true}  
+                        value={password}
+                        onChangeText={text => setPassword(text)}                     
                     />
                     <TouchableOpacity onPress={() => { }}>
                         <Text style={styles.loginText}>Forgot</Text>
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.buttonContainer} onPress={() => { }}>
+                <TouchableOpacity style={styles.buttonContainer} onPress={handleLogin}>
                     <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
                 <Text style={styles.secondaryText}>Or, login with ...</Text>
@@ -55,10 +88,10 @@ const LoginScreen = ({ navigation }) => {
                 </View>
             </View>
         </SafeAreaView>
-    )
-}
+    );
+};
 
-export default LoginScreen
+export default LoginScreen;
 
 const styles = StyleSheet.create({
     container: {
