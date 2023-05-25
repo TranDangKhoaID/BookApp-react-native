@@ -19,10 +19,11 @@ class MyFlatList extends Component {
                 console.error(error);
             });
     }
-        
+
     renderItem = ({ item }) => {
+        const { navigation } = this.props;
         return (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Book', { book: item })}>
                 <View style={item.id % 2 === 0 ? styles.contentSub_2 : styles.contentSub}>
                     <Image style={styles.iconContent} source={{ uri: item.cover_image }} />
                     <View style={styles.thongtin}>
@@ -39,7 +40,7 @@ class MyFlatList extends Component {
             </TouchableOpacity>
         );
     };
-    
+
     render() {
         return (
             <FlatList
@@ -49,7 +50,7 @@ class MyFlatList extends Component {
             />
         );
     }
-    
+
 }
 
 const styles = StyleSheet.create({

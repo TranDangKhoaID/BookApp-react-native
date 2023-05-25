@@ -1,35 +1,39 @@
 import React, {Component} from 'react';
-import {StyleSheet, SafeAreaView, TextInput, Text, View, Image, TouchableOpacity, FlatList, ScrollView } from 'react-native';
+import {SafeAreaView, StyleSheet, TextInput, Text, View, Image, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import MyFlatList from '../componets/flatlist_item';
+import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
 
-class HomePage extends React.Component {
-  render(){
-    return (
-      <SafeAreaView style={{ flex: 1, justifyContent: 'center'}}>
-        <View style={styles.container}>
-            <View style={styles.navigationBar}>
-              <View style={styles.inputTimKiemContainer}>
-                <TextInput 
-                  placeholder="Tìm kiếm"
-                  style={styles.textTimKiem}
-                />
-                <TouchableOpacity>
-                  <Image
-                    style={styles.iconTimKiem}
-                    source={require('../assets/books/icon_timkiem.png')}
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={styles.content}>
-                <MyFlatList  />
-            </View>
+function HomePage() {
+  const navigation = useNavigation();
+
+  return (
+    <SafeAreaView style={{ flex: 1, justifyContent: 'center'}}>
+      <View style={styles.container}>
+        <View style={styles.navigationBar}>
+          <View style={styles.inputTimKiemContainer}>
+            <TextInput 
+              placeholder="Tìm kiếm"
+              style={styles.textTimKiem}
+            />
+            <TouchableOpacity>
+              <Image
+                style={styles.iconTimKiem}
+                source={require('../assets/books/icon_timkiem.png')}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
-      </SafeAreaView>
-    );
-  }
+        <View style={styles.content}>
+          <MyFlatList navigation={navigation}/>
+        </View>
+      </View>
+    </SafeAreaView>
+  );
 }
-export default HomePage
+
+export default HomePage;
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

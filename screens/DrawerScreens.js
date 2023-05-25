@@ -1,18 +1,17 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import SinhNhat from './SinhNhat'
-import HomePage from './HomePage';
-import Profile from './Profile';
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import StackHome from './StackHome';
+import ProfileScreen from './Profile';
+import SinhNhat from './SinhNhat';
 
 const Drawer = createDrawerNavigator();
 
-function MyDrawer() {
+function DrawerNavigator() {
   return (
     <Drawer.Navigator useLegacyImplementation>
-      <Drawer.Screen name="HomePage" component={HomePage} />
-      <Drawer.Screen name="Profile" component={Profile} />
+      <Drawer.Screen name="StackHome" component={StackHome}/>
+      <Drawer.Screen name="Profile" component={ProfileScreen} />
       <Drawer.Screen name="SinhNhat" component={SinhNhat} />
     </Drawer.Navigator>
   );
@@ -21,7 +20,7 @@ function MyDrawer() {
 export default function DrawerHome() {
   return (
     <NavigationContainer>
-      <MyDrawer />
+      <DrawerNavigator />
     </NavigationContainer>
   );
 }
