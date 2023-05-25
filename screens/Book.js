@@ -1,56 +1,57 @@
 import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { useRoute } from '@react-navigation/native';
+import {useNavigation, useRoute } from '@react-navigation/native';
 
 const BookScreen = () => {
+    const navigation = useNavigation();
     const route = useRoute();
     const { book } = route.params;
+  
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.topContent}>
-                <Image style={styles.iconContent} source={{ uri: book.cover_image }} />
-                <View style={styles.thongtin}>
-                    <View style={styles.thongtin_sub}>
-                        <Text style={styles.text}>Tác giả: </Text>
-                        <Text style={styles.text_data}>{book.author}</Text>
-                    </View>
-                    <View style={styles.thongtin_sub}>
-                        <Text style={styles.text}>Thể loại: </Text>
-                        <Text style={styles.text_data}>{book.genre}</Text>
-                    </View>
-                    <View style={styles.thongtin_sub}>
-                        <Text style={styles.text}>Số chương: </Text>
-                        <Text style={styles.text_data}>{book.chapers ? book.chapers : 0}</Text>
-                    </View>
-                </View>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.topContent}>
+          <Image style={styles.iconContent} source={{ uri: book.cover_image }} />
+          <View style={styles.thongtin}>
+            <View style={styles.thongtin_sub}>
+              <Text style={styles.text}>Tác giả: </Text>
+              <Text style={styles.text_data}>{book.author}</Text>
             </View>
-            <View style={styles.button_control}>
-                <TouchableOpacity onPress={() => { }} style={styles.button_dt}>
-                    <Image source={require('../assets/books/doctruyen.png')} style={{ marginBottom: 5 }} />
-                    <Text style={{ color: '#FFF' }}>Đọc truyện</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => { }} style={styles.button_dsc}>
-                    <Image source={require('../assets/books/dschuong.png')} style={{ marginBottom: 5 }} />
-                    <Text style={{ color: '#000' }}>DS Chương</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => { }} style={styles.button_td}>
-                    <Image source={require('../assets/books/theodoi.png')} style={{ marginBottom: 5 }} />
-                    <Text style={{ color: '#000' }}>Theo dõi</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => { }} style={styles.button_bl}>
-                    <Image source={require('../assets/books/binhluan.png')} style={{ marginBottom: 5 }} />
-                    <Text style={{ color: '#000' }}>Bình luận</Text>
-                </TouchableOpacity>
-
+            <View style={styles.thongtin_sub}>
+              <Text style={styles.text}>Thể loại: </Text>
+              <Text style={styles.text_data}>{book.genre}</Text>
             </View>
-            <View style={styles.decription}>
-                <Text>
-                    {book.description}
-                </Text>
+            <View style={styles.thongtin_sub}>
+              <Text style={styles.text}>Số chương: </Text>
+              <Text style={styles.text_data}>{book.chapers ? book.chapers : 0}</Text>
             </View>
-        </SafeAreaView>
-    )
-}
+          </View>
+        </View>
+        <View style={styles.button_control}>
+          <TouchableOpacity onPress={() => { }} style={styles.button_dt}>
+            <Image source={require('../assets/books/doctruyen.png')} style={{ marginBottom: 5 }} />
+            <Text style={{ color: '#FFF' }}>Đọc truyện</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Chapters', {bookID : book.id})} style={styles.button_dsc}>
+            <Image source={require('../assets/books/dschuong.png')} style={{ marginBottom: 5 }} />
+            <Text style={{ color: '#000' }}>DS Chương</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => { }} style={styles.button_td}>
+            <Image source={require('../assets/books/theodoi.png')} style={{ marginBottom: 5 }} />
+            <Text style={{ color: '#000' }}>Theo dõi</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => { }} style={styles.button_bl}>
+            <Image source={require('../assets/books/binhluan.png')} style={{ marginBottom: 5 }} />
+            <Text style={{ color: '#000' }}>Bình luận</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.decription}>
+          <Text>
+            {book.description}
+          </Text>
+        </View>
+      </SafeAreaView>
+    );
+};
 
 export default BookScreen
 

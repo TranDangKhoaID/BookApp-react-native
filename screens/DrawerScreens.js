@@ -10,7 +10,7 @@ const Drawer = createDrawerNavigator();
 function DrawerNavigator() {
   return (
     <Drawer.Navigator useLegacyImplementation>
-      <Drawer.Screen name="StackHome" component={StackHome}/>
+      <Drawer.Screen name="Trang chủ" component={StackHome}/>
       <Drawer.Screen name="Profile" component={ProfileScreen} />
       <Drawer.Screen name="SinhNhat" component={SinhNhat} />
     </Drawer.Navigator>

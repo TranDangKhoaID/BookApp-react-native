@@ -5,10 +5,10 @@ import DrawerHome from './screens/DrawerScreens';
 import LoginScreen from './screens/Login';
 import RegisterScreen from './screens/Register';
 import StackNavi from './screens/StackLogin';
-import Book from './screens/Book';
 import HomePage from './screens/HomePage';
 import StackHome from './screens/StackHome';
 import BookScreen from './screens/Book';
+import ChaptersScreen from './screens/Chapters';
 
 export default function App(){
   return <DrawerHome />
