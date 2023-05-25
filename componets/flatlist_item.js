@@ -30,9 +30,9 @@ class MyFlatList extends Component {
                         <RatingBar totalStars={5} defaultRating={item.rating} />
                         <View style={styles.tacgia_chuong}>
                             <Text style={styles.text_tacgia}>
-                                Tac gia: {item.author} {'| Chuong: '}
+                                Tác giả: {item.author} {'| Chương: '}
                             </Text>
-                            <Text style={styles.text_chuong}>{item.chapter}</Text>
+                            <Text style={styles.text_chuong}>{item.chapters}</Text>
                         </View>
                     </View>
                 </View>
