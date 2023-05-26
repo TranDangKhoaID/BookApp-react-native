@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {SafeAreaView, StyleSheet, TextInput, Text, View, Image, TouchableOpacity, FlatList, ScrollView } from 'react-native';
+import { StyleSheet, TextInput, Text, View, Image, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import MyFlatList from '../componets/flatlist_item';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 function HomePage() {
   const navigation = useNavigation();
