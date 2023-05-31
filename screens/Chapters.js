@@ -1,11 +1,13 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { Component, useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import {useNavigation, useRoute } from '@react-navigation/native'
 
-const ChaptersScreen = ({navigation, route}) => {
-    const { bookID } = route.params;
-    const [data, setData] = useState([]);
-    const API_URL = `http://192.168.1.7:3001/api/books/${bookID}/chapters`;
+const ChaptersScreen = ({route }) => {
+  const navigation = useNavigation();
+  const { bookID } = route.params;
+  const [data, setData] = useState([]);
+  const API_URL = `http://192.168.1.7:3001/api/books/${bookID}/chapters`;
   useEffect(() => {
     fetchData();
   }, []);
@@ -21,7 +23,7 @@ const ChaptersScreen = ({navigation, route}) => {
   };
 
   const renderItem = ({ item }) => {
-    return <ListItem key={item.id} chapter={item.chapter_number} title={item.title} />;
+    return <ListItem navigation={navigation} id={item.id} chapter={item.chapter_number} title={item.title} />;
   };
 
   return (
@@ -30,7 +32,7 @@ const ChaptersScreen = ({navigation, route}) => {
       <FlatList
         data={data}
         renderItem={renderItem}
-        keyExtractor={(item) => item.chapter}
+        keyExtractor={(item) => item.id.toString()}
       />
     </SafeAreaView>
   );
@@ -39,40 +41,44 @@ const ChaptersScreen = ({navigation, route}) => {
 export default ChaptersScreen
 
 class ListItem extends Component {
-    render() {
-        const { chapter, title } = this.props;
+  render() {
+    const { navigation,chapter, title, id } = this.props;
 
-        return (
-            <View style={styles.textContainer}>
-                <View style={styles.textContent}>
-                    <Text style={{ fontSize: 15 }}>Chương </Text>
-                    <Text style={{ fontSize: 15 }}>{chapter} : </Text>
-                    <Text style={{ fontSize: 15 }}>{title}</Text>
-                </View>
-                <Text style={styles.border}></Text>
-            </View>
-        );
-    }
+    return (
+
+      <View style={styles.textContainer}>
+        <TouchableOpacity onPress={() => navigation.navigate('DetailChapter', {id : id})}>
+          <View style={styles.textContent}>
+            <Text style={{ fontSize: 15 }}>Chương </Text>
+            <Text style={{ fontSize: 15 }}>{chapter} : </Text>
+            <Text style={{ fontSize: 15 }}>{title}</Text>
+          </View>
+        </TouchableOpacity>
+        <Text style={styles.border}></Text>
+      </View>
+
+    );
+  }
 }
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    textC: {
-        fontWeight: 'bold',
-        margin: 10,
-        fontSize: 25,
-    },
-    textContainer: {
-        marginTop: 10,
-        marginHorizontal: 10,
-    },
-    textContent: {
-        flexDirection: 'row',
-        fontSize: 15,
-    },
-    border: {
-        borderBottomWidth: 1,
-        borderBottomColor: "#000"
-    }
+  container: {
+    flex: 1,
+  },
+  textC: {
+    fontWeight: 'bold',
+    margin: 10,
+    fontSize: 25,
+  },
+  textContainer: {
+    marginTop: 10,
+    marginHorizontal: 10,
+  },
+  textContent: {
+    flexDirection: 'row',
+    fontSize: 15,
+  },
+  border: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#000"
+  }
 })

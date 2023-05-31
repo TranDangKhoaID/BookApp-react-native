@@ -9,6 +9,8 @@ import HomePage from './screens/HomePage';
 import StackHome from './screens/StackHome';
 import BookScreen from './screens/Book';
 import ChaptersScreen from './screens/Chapters';
+import DetailChapter from './screens/DetailChapter';
+
 
 export default function App(){
   return <DrawerHome />
