@@ -4,6 +4,7 @@ import HomePage from './HomePage';
 import BookScreen from './Book';
 import ChaptersScreen from './Chapters';
 import DetailChapter from './DetailChapter';
+import CommentPage from './CommentPage';
 
 const Stack = createStackNavigator();
 
@@ -14,6 +15,7 @@ const StackNavigator = () => {
       <Stack.Screen name="Book" component={BookScreen} />
       <Stack.Screen name="Chapters" component={ChaptersScreen} />
       <Stack.Screen name="DetailChapter" component={DetailChapter} />
+      <Stack.Screen name="Comments" component={CommentPage} />
     </Stack.Navigator>
   );
 };

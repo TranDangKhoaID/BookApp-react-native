@@ -1,6 +1,7 @@
 import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import {useNavigation, useRoute } from '@react-navigation/native';
+import RatingDialog from '../componets/RatingDialog';
 
 const BookScreen = () => {
     const navigation = useNavigation();
@@ -35,11 +36,10 @@ const BookScreen = () => {
             <Image source={require('../assets/books/dschuong.png')} style={{ marginBottom: 5 }} />
             <Text style={{ color: '#000' }}>DS Chương</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { }} style={styles.button_td}>
-            <Image source={require('../assets/books/theodoi.png')} style={{ marginBottom: 5 }} />
-            <Text style={{ color: '#000' }}>Theo dõi</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => { }} style={styles.button_bl}>
+          <RatingDialog>
+            
+          </RatingDialog>
+          <TouchableOpacity onPress={() => navigation.navigate('Comments', {bookID : book.id})} style={styles.button_bl}>
             <Image source={require('../assets/books/binhluan.png')} style={{ marginBottom: 5 }} />
             <Text style={{ color: '#000' }}>Bình luận</Text>
           </TouchableOpacity>

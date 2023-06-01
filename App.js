@@ -10,6 +10,8 @@ import StackHome from './screens/StackHome';
 import BookScreen from './screens/Book';
 import ChaptersScreen from './screens/Chapters';
 import DetailChapter from './screens/DetailChapter';
+import RatingDialog from './componets/RatingDialog';
+import CommentPage from './screens/CommentPage';
 
 
 export default function App(){
