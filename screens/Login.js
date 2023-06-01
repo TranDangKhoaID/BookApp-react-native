@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
+        
     },
     contentContainer: {
         marginHorizontal: 25,
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
         paddingVertical: 0,
     },
     buttonContainer: {
-        backgroundColor: '#AD40AF',
+        backgroundColor: '#309CFF',
         padding: 20,
         borderRadius: 10,
         marginBottom: 30,
@@ -144,7 +145,7 @@ const styles = StyleSheet.create({
         color: '#fff',
     },
     loginText: {
-        color: '#AD40DF',
+        color: '#309CFF',
         fontWeight: '700',
     },
     secondaryText: {
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
         marginBottom: 30,
     },
     registerText: {
-        color: '#AD40AF',
+        color: '#309CFF',
         fontWeight: '700',
     },
 });

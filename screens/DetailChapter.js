@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
-import React from 'react'
+import {View, Text, ScrollView, StyleSheet} from 'react-native';
+import React,{ useRef, useState }  from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 
 const DetailChapter = ({ navigation, route }) => {
+    //lay data
     const { id } = route.params;
     const [data, setData] = useState(null);
     const API_URL = `http://192.168.1.7:3001/api/chapters/${id}`;
@@ -21,7 +22,7 @@ const DetailChapter = ({ navigation, route }) => {
             console.error(error);
         }
     };
-
+    
     if (!data) {
         // Xử lý khi đang tải dữ liệu
         return (
@@ -45,9 +46,6 @@ const DetailChapter = ({ navigation, route }) => {
     );
 };
 export default DetailChapter;
-
-
-
 
 const styles = StyleSheet.create({
     text_title: {

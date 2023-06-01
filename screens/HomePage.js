@@ -6,8 +6,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 function HomePage() {
   const navigation = useNavigation();
-
+ 
+  
   return (
+    
     <SafeAreaView style={{ flex: 1, justifyContent: 'center'}}>
       <View style={styles.container}>
         <View style={styles.navigationBar}>

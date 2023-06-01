@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
         paddingVertical: 0,
     },
     buttonContainer: {
-        backgroundColor: '#AD40AF',
+        backgroundColor: '#309CFF',
         padding: 20,
         borderRadius: 10,
         marginBottom: 30,
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
         marginBottom: 30,
     },
     loginText: {
-        color: '#AD40AF',
+        color: '#309CFF',
         fontWeight: '700',
     },
 });

@@ -63,6 +63,7 @@ class ListItem extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FCF6E1'
   },
   textC: {
     fontWeight: 'bold',
