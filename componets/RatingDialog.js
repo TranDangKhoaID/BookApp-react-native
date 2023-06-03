@@ -3,10 +3,13 @@ import {StyleSheet, View, Alert,TouchableOpacity,Image, Text } from 'react-nativ
 import Dialog from "react-native-dialog";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const RatingDialog = () => {
+const RatingDialog = (props) => {
   const [dialogVisible, setDialogVisible] = useState(false);
-  const [rating, setRating] = useState(0);
-
+  const [ratingData, setRatingData] = useState({ rating: 0 });
+  //tbc
+  const [totalRating, setTotalRating] = useState(0);
+  const [ratingCount, setRatingCount] = useState(0);
+  const bookID = props.bookID
   const showDialog = () => {
     setDialogVisible(true);
   };
@@ -17,14 +20,15 @@ const RatingDialog = () => {
 
   const renderStars = () => {
     const stars = [];
+    const averageRating = ratingCount === 0 ? 0 : totalRating / ratingCount;
     for (let i = 1; i <= 5; i++) {
       stars.push(
         <Icon
           key={i}
-          name={i <= rating ? 'star' : 'star-o'}
+          name={i <= ratingData.rating ? 'star' : 'star-o'}
           size={30}
           style={{ color: '#FFD700', marginRight: 5 }}
-          onPress={() => setRating(i)}
+          onPress={() => setRatingData({ rating: i })}
         />
       );
     }
@@ -32,10 +36,30 @@ const RatingDialog = () => {
   };
   const handleRate = () => {
     // Lưu giá trị đánh giá (rating) vào cơ sở dữ liệu hoặc thực hiện các xử lý khác
+    fetch(`http://192.168.1.7:3001/api/books/${bookID}/rating`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(ratingData)
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Cập nhật tổng điểm và số lượng đánh giá
+        setTotalRating(totalRating + ratingData.rating);
+        setRatingCount(ratingCount + 1);
+  
+        // Xử lý kết quả cập nhật sách thành công
+        console.log('Sách đã được cập nhật:', data);
+      })
+      .catch(error => {
+        // Xử lý lỗi
+        console.error('Lỗi khi cập nhật sách:', error);
+      });
+  
     setDialogVisible(false);
-    console.log(rating)
     Alert.alert("Cảm ơn bạn đã đánh giá!");
-  };
+  };  
 
   return (
     <View>

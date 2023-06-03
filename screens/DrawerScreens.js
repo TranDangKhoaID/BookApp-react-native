@@ -36,6 +36,8 @@ function DrawerNavigator() {
 
 export default function DrawerHome() {
   return (
-    <DrawerNavigator />
+    <NavigationContainer>
+      <DrawerNavigator />
+    </NavigationContainer>
   );
 }

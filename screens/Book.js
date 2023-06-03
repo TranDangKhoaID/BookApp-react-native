@@ -36,8 +36,7 @@ const BookScreen = () => {
             <Image source={require('../assets/books/dschuong.png')} style={{ marginBottom: 5 }} />
             <Text style={{ color: '#000' }}>DS Chương</Text>
           </TouchableOpacity>
-          <RatingDialog>
-            
+          <RatingDialog bookID={book.id}>
           </RatingDialog>
           <TouchableOpacity onPress={() => navigation.navigate('Comments', {bookID : book.id})} style={styles.button_bl}>
             <Image source={require('../assets/books/binhluan.png')} style={{ marginBottom: 5 }} />
