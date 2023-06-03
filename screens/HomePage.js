@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import { StyleSheet, TextInput, Text, View, Image, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import MyFlatList from '../componets/flatlist_item';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
@@ -6,8 +6,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 function HomePage() {
   const navigation = useNavigation();
- 
-  
+  const [searchText, setSearchText] = useState('');
+
+  const handleSearchTextChange = (text) => {
+    setSearchText(text);
+  };
   return (
     
     <SafeAreaView style={{ flex: 1, justifyContent: 'center'}}>
@@ -17,6 +20,7 @@ function HomePage() {
             <TextInput 
               placeholder="Tìm kiếm"
               style={styles.textTimKiem}
+              onChangeText={handleSearchTextChange}
             />
             <TouchableOpacity>
               <Image
@@ -27,7 +31,7 @@ function HomePage() {
           </View>
         </View>
         <View style={styles.content}>
-          <MyFlatList navigation={navigation}/>
+          <MyFlatList searchText={searchText} navigation={navigation}/>
         </View>
       </View>
     </SafeAreaView>

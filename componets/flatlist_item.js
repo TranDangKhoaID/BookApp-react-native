@@ -6,7 +6,7 @@ class MyFlatList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            books: [] // Mảng lưu trữ danh sách sách
+            books: [], // Mảng lưu trữ danh sách sách
         };
     }
     componentDidMount() {
@@ -42,9 +42,13 @@ class MyFlatList extends Component {
     };
 
     render() {
+        const { searchText } = this.props;
+        const filteredBooks = this.state.books.filter((book) =>
+        book.title.toLowerCase().includes(searchText.toLowerCase())
+        );
         return (
             <FlatList
-                data={this.state.books} // Sử dụng dữ liệu sách từ trạng thái
+                data={filteredBooks} // Sử dụng dữ liệu sách từ trạng thái
                 keyExtractor={item => item.id.toString()}
                 renderItem={this.renderItem}
             />
