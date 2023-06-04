@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 import {useNavigation, useRoute } from '@react-navigation/native';
 import RatingDialog from '../componets/RatingDialog';
 
@@ -7,7 +7,18 @@ const BookScreen = () => {
     const navigation = useNavigation();
     const route = useRoute();
     const { book } = route.params;
-  
+    //api
+    const [chapters, setChapters] = useState([]);
+    useEffect(() => {
+      fetch(`http://192.168.1.7:3001/api/books/${book.id}/chapters`)
+          .then(response => response.json())
+          .then(data => {
+            setChapters(data);
+          })
+          .catch(error => {
+              console.error(error);
+          });
+  }, []);
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.topContent}>
@@ -23,7 +34,7 @@ const BookScreen = () => {
             </View>
             <View style={styles.thongtin_sub}>
               <Text style={styles.text}>Số chương: </Text>
-              <Text style={styles.text_data}>{book.chapers ? book.chapers : 0}</Text>
+              <Text style={styles.text_data}>{chapters.length}</Text>
             </View>
           </View>
         </View>

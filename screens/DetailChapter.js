@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { Picker } from '@react-native-picker/picker';
 
 
-const DetailChapter = ({ navigation, route }) => {
+const DetailChapter = ({ route }) => {
     //lay data
     const { id } = route.params;
     const [data, setData] = useState(null);

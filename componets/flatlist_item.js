@@ -7,6 +7,7 @@ class MyFlatList extends Component {
         super(props);
         this.state = {
             books: [], // Mảng lưu trữ danh sách sách
+            chapters:[],
         };
     }
     componentDidMount() {
@@ -19,9 +20,10 @@ class MyFlatList extends Component {
                 console.error(error);
             });
     }
-
+    
     renderItem = ({ item }) => {
         const { navigation } = this.props;
+       
         return (
             <TouchableOpacity onPress={() => navigation.navigate('Book', { book: item })}>
                 <View style={item.id % 2 === 0 ? styles.contentSub_2 : styles.contentSub}>
@@ -31,9 +33,9 @@ class MyFlatList extends Component {
                         <RatingBar totalStars={5} defaultRating={item.rating} />
                         <View style={styles.tacgia_chuong}>
                             <Text style={styles.text_tacgia}>
-                                Tác giả: {item.author} {'| Chương: '}
+                                Tác giả: {item.author}
                             </Text>
-                            <Text style={styles.text_chuong}>{item.chapters}</Text>
+                           
                         </View>
                     </View>
                 </View>

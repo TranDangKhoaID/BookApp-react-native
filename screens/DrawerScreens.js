@@ -28,8 +28,8 @@ function DrawerNavigator() {
           <Ionicons name="home-outline" size={30} color="#666"/>
         }
       }}/>
-      <Drawer.Screen name="Profile" component={ProfileScreen} />
-      <Drawer.Screen name="SinhNhat" component={SinhNhat} />
+      <Drawer.Screen name="Thông Tin" component={ProfileScreen} />
+      <Drawer.Screen name="Sinh Nhật" component={SinhNhat} />
     </Drawer.Navigator>
   );
 }
