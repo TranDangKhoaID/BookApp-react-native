@@ -15,5 +15,5 @@ import CommentPage from './screens/CommentPage';
 
 
 export default function App(){
-  return <DrawerHome />
+  return <StackNavi />
 }
