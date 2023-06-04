@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {StyleSheet, View, Alert,TouchableOpacity,Image, Text } from 'react-native';
 import Dialog from "react-native-dialog";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import api from '../LinkAPI';
 
 const RatingDialog = (props) => {
   const [dialogVisible, setDialogVisible] = useState(false);
@@ -36,7 +37,7 @@ const RatingDialog = (props) => {
   };
   const handleRate = () => {
     // Lưu giá trị đánh giá (rating) vào cơ sở dữ liệu hoặc thực hiện các xử lý khác
-    fetch(`http://192.168.1.7:3001/api/books/${bookID}/rating`, {
+    fetch(api + `:3001/api/books/${bookID}/rating`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, SafeAreaView, TextInput, TouchableOpacity, Imag
 
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from '@expo/vector-icons';
+import api from "../LinkAPI";
 
 const RegisterScreen = ({ navigation }) => {
     const [fullName, setFullName] = useState('');
@@ -20,7 +21,7 @@ const RegisterScreen = ({ navigation }) => {
         // Gửi yêu cầu đăng ký đến API
         // Sử dụng các giá trị fullName, phone, email, password để gửi đi
 
-        fetch('http://192.168.1.7:3000/api/users/register', {
+        fetch(api + ':3000/api/users/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

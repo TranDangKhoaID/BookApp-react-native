@@ -3,13 +3,14 @@ import React, { useRef, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useEffect } from 'react'
 import { Picker } from '@react-native-picker/picker';
+import api from '../LinkAPI';
 
 
 const DetailChapter = ({ route }) => {
     //lay data
     const { id } = route.params;
     const [data, setData] = useState(null);
-    const API_URL = `http://192.168.1.7:3001/api/chapters/${id}`;
+    const API_URL =  api + `:3001/api/chapters/${id}`;
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [fontSize, setFontSize] = useState(15);
 

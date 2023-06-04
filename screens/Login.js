@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, stylessocialButton, View, Text, TextInput, TouchableOpacity, Image, SafeAreaView } from 'react-native';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import * as SecureStore from 'expo-secure-store';
+import api from '../LinkAPI';
 
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -15,7 +16,7 @@ const LoginScreen = ({ navigation }) => {
         };
 
         // Gửi yêu cầu đăng nhập đến API
-        fetch('http://192.168.1.7:3000/api/users/login', {
+        fetch(api +  ':3000/api/users/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

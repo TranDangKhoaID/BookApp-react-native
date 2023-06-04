@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, SafeAreaView, TextInput, Text, View, Image, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import RatingBar from './rating_bar';
+import api from '../LinkAPI';
 
 class MyFlatList extends Component {
     constructor(props) {
@@ -11,7 +12,7 @@ class MyFlatList extends Component {
         };
     }
     componentDidMount() {
-        fetch('http://192.168.1.7:3001/api/books')
+        fetch(api + ':3001/api/books')
             .then(response => response.json())
             .then(data => {
                 this.setState({ books: data });

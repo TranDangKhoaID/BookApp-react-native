@@ -2,12 +2,13 @@ import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native
 import React, { Component, useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {useNavigation, useRoute } from '@react-navigation/native'
+import api from '../LinkAPI';
 
 const ChaptersScreen = ({route }) => {
   const navigation = useNavigation();
   const { bookID } = route.params;
   const [data, setData] = useState([]);
-  const API_URL = `http://192.168.1.7:3001/api/books/${bookID}/chapters`;
+  const API_URL = api + `:3001/api/books/${bookID}/chapters`;
   useEffect(() => {
     fetchData();
   }, []);

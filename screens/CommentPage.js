@@ -1,6 +1,7 @@
 import React, { useState, Component, useEffect } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, FlatList } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
+import api from '../LinkAPI';
 const CommentPage = ({route}) => {
    //user
    const [user, setUser] = useState(null);
@@ -20,7 +21,7 @@ const CommentPage = ({route}) => {
   //lay dl tu api
   const { bookID } = route.params;
   const [data, setData] = useState([]);
-  const API_URL = `http://192.168.1.7:3001/api/books/${bookID}/comments`;
+  const API_URL = api + `:3001/api/books/${bookID}/comments`;
   useEffect(() => {
     fetchData();
   }, []);

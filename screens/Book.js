@@ -2,6 +2,7 @@ import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'r
 import React,{useEffect, useState} from 'react'
 import {useNavigation, useRoute } from '@react-navigation/native';
 import RatingDialog from '../componets/RatingDialog';
+import api from '../LinkAPI';
 
 const BookScreen = () => {
     const navigation = useNavigation();
@@ -10,7 +11,7 @@ const BookScreen = () => {
     //api
     const [chapters, setChapters] = useState([]);
     useEffect(() => {
-      fetch(`http://192.168.1.7:3001/api/books/${book.id}/chapters`)
+      fetch(api + `:3001/api/books/${book.id}/chapters`)
           .then(response => response.json())
           .then(data => {
             setChapters(data);
